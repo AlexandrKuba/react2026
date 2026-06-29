@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>React JSX UserCard</title>
+    <!-- Підключаємо React -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <!-- Підключаємо ReactDOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <!-- Babel для підтримки JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <p>
+      Задача 2. Вводиться номер місяця. Автоматично виводити рекомендований одяг
+      (зима – пальто, літо – шорти ….). Також автоматично виводити зображення з
+      відповідним зображенням лісу (зима – ліс зі снігом, осінь – жовтий ліс,
+      …).
+    </p>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function MonthWeather() {
+        const [monthNum, setMonthNum] = React.useState(1);
+        let needDress;
+        let forestImg;
+        switch (monthNum) {
+          case 1:
+          case 2:
+          case 12:
+            needDress = "шапку та теплі речі";
+            forestImg = `https://balthazar.club/o/uploads/posts/2023-10/1696560549_balthazar-club-p-priroda-zimnii-les-krasivo-1.jpg`;
+            break;
+          case 3:
+          case 4:
+          case 5:
+            needDress = "футболку, а на вечір можна взяти з собою кофту";
+            forestImg = `https://grandgames.net/puzzle/f1200/vesennij_les_2.jpg`;
+            break;
+          case 6:
+          case 7:
+          case 8:
+            needDress = "шльопки та щось легеньке";
+            forestImg = `https://i.pinimg.com/736x/34/2a/e2/342ae2540e4a4397da9c6ba565576751.jpg`;
+            break;
+          case 9:
+          case 10:
+          case 11:
+            needDress = "дощовик";
+            break;
+
+          default:
+            needDress = "спочатку обери місяць від 1 до 12";
+            forestImg = `https://balthazar.club/o/uploads/posts/2023-10/1696943497_balthazar-club-p-priroda-les-osen-oboi-3.jpg`;
+            break;
+        }
+        return (
+          <div>
+            <label>
+              Введіть номер місяця
+              <input
+                type="number"
+                value={monthNum}
+                onChange={(e) => {
+                  setMonthNum(Number(e.target.value));
+                }}
+              />
+            </label>
+            <div>
+              <p>Рекомендую одягти {needDress}</p>
+              <img src={forestImg} style={{ maxWidth: "100%" }} />
+            </div>
+          </div>
+        );
+      }
+
+      // Головний компонент App
+      function App() {
+        return <MonthWeather />;
+      }
+
+      // Отримуємо DOM-елемент з id="root"
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      // Рендеримо компонент App у елемент root
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>

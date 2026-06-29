@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>React JSX UserCard</title>
+    <!-- Підключаємо React -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <!-- Підключаємо ReactDOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <!-- Babel для підтримки JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <p>Задача 1. Вводиться кількість пасажирів. Вивести:</p>
+    <ul>
+      <li>● скільки потрібно автобусів (кожен автобус на 20 місць)</li>
+      <li>● скільки пляшок води (кожному пасажиру 2 пляшки)</li>
+      <li>● скільки бутербродів (кожному пасажиру 3 бутерброди)</li>
+    </ul>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Passengers() {
+        const [passengersNum, setPassengersNum] = React.useState();
+        const seatsOnBus = 20;
+        const waterForPassenger = 2;
+        const sandwichesForPassenger = 3;
+        const numOfBuses = Math.ceil(passengersNum / seatsOnBus);
+        const numOfWaterBottles = passengersNum * waterForPassenger;
+        const numOfWaterSandwiches = passengersNum * sandwichesForPassenger;
+
+        return (
+          <div>
+            <label>
+              Введіть кількість пасажирів
+              <input
+                type="number"
+                value={passengersNum}
+                onChange={(e) => {
+                  setPassengersNum(Number(e.target.value));
+                }}
+              />
+            </label>
+            <div>
+              <p>
+                Необхідна кількість автобусів - {numOfBuses ? numOfBuses : 0}
+              </p>
+              <p>
+                Необхідна кількість пляшов коди -{" "}
+                {numOfWaterBottles ? numOfWaterBottles : 0}
+              </p>
+              <p>
+                Необхідна кількість бутербродів -{" "}
+                {numOfWaterSandwiches ? numOfWaterSandwiches : 0}
+              </p>
+            </div>
+          </div>
+        );
+      }
+
+      // Головний компонент App
+      function App() {
+        return <Passengers />;
+      }
+
+      // Отримуємо DOM-елемент з id="root"
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      // Рендеримо компонент App у елемент root
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
